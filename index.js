@@ -1,15 +1,12 @@
-// for (let index = 0; index < 5; index++) {
-//     console.log("index" ,index+1);
-    
-// }
-// console.log("Welcome")
+
 const express=require("express");
 const app=express();
 const PORT=7000;
-//const { data} =require("./DB/currencies.json")
-//const { data1} = require("./DB/users.json")
-const { getCurrencies ,getCurrenciesBySymbol} = require("./controllers/currencies.controller")
-const { getAllUsers, searchUsersByQuery, getUsersById} = require("./controllers/users.controller")
+const currenciesRoutes = require("./routes/currencies.routes");
+ const usersRoutes = require("./routes/users.routes");
+
+
+
 
 
 
@@ -19,15 +16,8 @@ const { getAllUsers, searchUsersByQuery, getUsersById} = require("./controllers/
 app.listen(PORT ,() => {
     console.log(" App listening ....")
 })
-app.get("/" ,(req,res) => {
-    res.write("<h1>currencies database</h1>")
-    
-    
-    res.end();
-})
-app.get("/status",(req,res) => {
-    return res.json({"server status ": "active"});
-})
+
+
 
 //  /currencies/:symbol (request param example)
 
@@ -61,14 +51,15 @@ app.get("/status",(req,res) => {
 //         res.json(data)
 //     }
 // })
-app.get("/currencies",getCurrencies);
-app.get("/currencies/:symbol",getCurrenciesBySymbol);
+
+app.get("/status",(req,res) => {
+    return res.json({"server status ": "active"});
+})
 
 
-app.get("/users", getAllUsers)
+app.use("/currencies" ,currenciesRoutes);
+app.use("/users" , usersRoutes);
 
-app.get("/users/search",searchUsersByQuery);
-app.get("/users/:uuid" , getUsersById);
 
 
 

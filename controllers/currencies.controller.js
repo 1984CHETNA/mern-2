@@ -15,8 +15,9 @@ const getCurrencies=(req,res) =>{
 
 
 const getCurrenciesBySymbol=(req,res) => {
-    // console.log(req.params) // symbol: "inr"
+    //console.log(req.params) // symbol: "inr"
     // return res.json(data)
+    
 const {symbol} =req.params;
  const result=data.find((ele) => ele.id.toLowerCase()===symbol.toLowerCase()
  )
